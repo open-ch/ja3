@@ -8,11 +8,11 @@ This package includes a go library with an implementation of the algorithm and a
 
 ## Usage
 
-####Library
+###Library
 ```
 import "github.com/open-ch/ja3"
 ```
-See the following example to get an idea of the exposed API:
+See the following example to get an idea of the exposed API. For more information look in the [godoc](https://godoc.org/github.com/open-ch/ja3).
 
 ```
 j, err := ja3.ComputeJA3FromSegment(tcpPayload)
@@ -30,6 +30,14 @@ fmt.Printf("JA3Hash: %v, JA3String: %v, SNI: %v\n", ja3Hash, ja3String, sni)
 // Get the JA3 string as a byte array for more efficient handling
 ja3String := j.GetJA3ByteString()
 anyWriterClass.Write(ja3String)
+```
+
+###CLI
+```
+[host:]# go build ja3exporter.go engine.go
+
+[host:]# ./ja3exporter -pcap="/path/to/file"
+{"destination_ip":"172.217.168.67","destination_port":443,"ja3":"771,49200-49196-49199-49195-49172-49162-49171-49161-159-158-57-51-157-156-53-47-10-255,0-11-10-35-13-5-15-13172,23-25-28-27-24-26-22-14-13-11-12-9-10,0-1-2","ja3_digest":"5e647d60a56d199388ae462b75b3cdad","source_ip":"213.156.236.180","source_port":34577,"sni":"www.google.ch","timestamp":1537516825571014000}
 ```
 
 ## Tests and Benchmarks
