@@ -88,8 +88,8 @@ The getter functions are setup to cache their results so any further access to t
 ```
 goos: darwin
 goarch: amd64
-BenchmarkGetJA3ByteString-4        	1000000000	         2.73 ns/op	       0 B/op	       0 allocs/op
-BenchmarkGetJA3String-4            	1000000000	         2.44 ns/op	       0 B/op	       0 allocs/op
-BenchmarkGetJA3Hash-4              	1000000000	         2.72 ns/op	       0 B/op	       0 allocs/op
-BenchmarkGetSNI-4                  	300000000	         5.61 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGetJA3ByteString-4        	1000000000	         2.65 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGetJA3String-4            	50000000	        39.3 ns/op	      64 B/op	       1 allocs/op
+BenchmarkGetJA3Hash-4              	1000000000	         2.40 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGetSNI-4                  	300000000	         5.57 ns/op	       0 B/op	       0 allocs/op
 ```

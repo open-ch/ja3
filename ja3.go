@@ -20,7 +20,6 @@ type JA3 struct {
 	ellipticCurvePF []uint8
 	sni             []byte
 	ja3ByteString   []byte
-	ja3String       string
 	ja3Hash         string
 }
 
@@ -43,10 +42,7 @@ func (j *JA3) GetJA3ByteString() []byte {
 // GetJA3String returns the JA3 string as a string. This function uses caching, so repeated calls to this function on
 // the same JA3 object will not trigger any new calculations.
 func (j *JA3) GetJA3String() string {
-	if j.ja3String == "" {
-		j.ja3String = string(j.GetJA3ByteString())
-	}
-	return j.ja3String
+	return string(j.GetJA3ByteString())
 }
 
 // GetJA3Hash returns the MD5 Digest of the JA3 string in hexadecimal representation. This function uses caching, so
