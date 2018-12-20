@@ -39,7 +39,9 @@ func ReadFromInterface(device string) (Reader, error) {
 }
 
 // ComputeJA3FromReader reads from reader until an io.EOF error is encountered and writes verbose information about
-// the found Client Hellos in the stream in JSON format to the writer.
+// the found Client Hellos in the stream in JSON format to the writer. It only supports packets consisting of a pure
+// ETH/IP/TCP stack but is very fast. If your packets have a different structure, use the CompatComputeJA3FromReader
+// function.
 func ComputeJA3FromReader(reader Reader, writer io.Writer) error {
 
 	// Build a selective parser which only decodes the needed layers
@@ -96,6 +98,9 @@ func ComputeJA3FromReader(reader Reader, writer io.Writer) error {
 	return nil
 }
 
+// CompatComputeJA3FromReader has the same functionality as ComputeJA3FromReader but supports any protocol that is
+// supported by the gopacket library. It is much slower than the ComputeJA3FromReader function and therefore should not
+// be used unless needed.
 func CompatComputeJA3FromReader(reader Reader, writer io.Writer) error {
 	for {
 		// Read packet data
@@ -132,7 +137,7 @@ func CompatComputeJA3FromReader(reader Reader, writer io.Writer) error {
 
 // writeJSON to writer
 func writeJSON(dstIP string, dstPort int, srcIP string, srcPort int, timestamp int64, j *ja3.JA3, writer io.Writer) error {
-	// Use the same convention as in the official python implementation
+	// Use the same convention as in the official Python implementation
 	js, err := json.Marshal(struct {
 		DstIP     string `json:"destination_ip"`
 		DstPort   int    `json:"destination_port"`

@@ -21,6 +21,7 @@ func main() {
 	pcap := flag.String("pcap", "", "Path to pcap file to be read")
 	pcapng := flag.String("pcapng", "", "Path to pcapng file to be read")
 	device := flag.String("interface", "", "Name of interface to be read (e.g. eth0)")
+	compat := flag.Bool("c", false, "Activates compatibility mode (use this if packet does not consist of a pure ETH/IP/TCP stack)")
 	flag.Parse()
 
 	if *pcap != "" {
@@ -36,7 +37,11 @@ func main() {
 		}
 
 		// Compute JA3 digests and output to os.Stdout
-		err = ComputeJA3FromReader(r, os.Stdout)
+		if *compat {
+			err = ComputeJA3FromReader(r, os.Stdout)
+		} else {
+			err = CompatComputeJA3FromReader(r, os.Stdout)
+		}
 		if err != nil {
 			panic(err)
 		}
@@ -53,7 +58,11 @@ func main() {
 		}
 
 		// Compute JA3 digests and output to os.Stdout
-		err = ComputeJA3FromReader(r, os.Stdout)
+		if *compat {
+			err = ComputeJA3FromReader(r, os.Stdout)
+		} else {
+			err = CompatComputeJA3FromReader(r, os.Stdout)
+		}
 		if err != nil {
 			panic(err)
 		}
@@ -65,7 +74,11 @@ func main() {
 		}
 
 		// Compute JA3 digests and output to os.Stdout
-		err = ComputeJA3FromReader(r, os.Stdout)
+		if *compat {
+			err = ComputeJA3FromReader(r, os.Stdout)
+		} else {
+			err = CompatComputeJA3FromReader(r, os.Stdout)
+		}
 		if err != nil {
 			panic(err)
 		}

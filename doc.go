@@ -5,7 +5,9 @@
 // tree.
 
 /*
-Package ja3 provides JA3 Client Fingerprinting for the Go language.
+Package ja3 provides JA3 Client Fingerprinting for the Go language by looking at the
+TLS Client Hello packets.
+
 Basic Usage
 ja3 takes in TCP payload data as a []byte and computes the corresponding JA3
 string and digest.
