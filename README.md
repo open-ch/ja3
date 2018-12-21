@@ -6,7 +6,7 @@ The algorithm originates from Salesforce and the official Python and Bro impleme
 
 This package includes a go library with an implementation of the algorithm and a command line tool which allows reading packets from pcap and pcapng files as well as from an interface.
 
-As the Go implementation of [dreadl0ck](https://github.com/dreadl0ck) uses a deprecated and faulty TLS parser and does not comply with the JA3 algorithm regarding certain ciphers, Open Systems AG decided to build its own implementation of the JA3 algorithm. So we also had more control over the parsing and could make it more efficient.
+Our requirements on the Go Implementation of the JA3 library were efficiency, robustness and correctness. Unfortunately no public available implementation did fulfill all these requirements.
 
 ## Usage
 
@@ -41,7 +41,7 @@ To check out the CLI, try the following on your preferred shell.
 {"destination_ip":"172.217.168.67","destination_port":443,"ja3":"771,49200-49196-49199-49195-49172-49162-49171-49161-159-158-57-51-157-156-53-47-10-255,0-11-10-35-13-5-15-13172,23-25-28-27-24-26-22-14-13-11-12-9-10,0-1-2","ja3_digest":"5e647d60a56d199388ae462b75b3cdad","source_ip":"213.156.236.180","source_port":34577,"sni":"www.google.ch","timestamp":1537516825571014000}
 ```
 
-**Attention: By default, the JA3Exporter only supports packets built up of an Ethernet Layer, followed by an IPv4 or IPv6 Layer, followed by a TCP Layer.**
+**Attention: By default, the JA3Exporter only supports packets built up of an Ethernet - IPv4 or IPv6 - TCP Stack.**
 
 If the package structure does not comply with this, use the -c flag for compatibility mode. Beware that this will make the JA3Exporter significantly slower.
 
