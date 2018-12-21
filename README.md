@@ -65,7 +65,7 @@ time ja3 ~/Documents/pcaps/DEF\ CON\ 23\ ICS\ Village.pcap > /dev/null
 23.874 total
 
 // Dreadl0cks Go Implementation
-time ./cmd -read=/Users/enm/Documents/pcaps/DEF\ CON\ 23\ ICS\ Village.pcap > /dev/null
+time goja3 -read=/Users/enm/Documents/pcaps/DEF\ CON\ 23\ ICS\ Village.pcap > /dev/null
 2.47s user
 0.11s system
 164% cpu
