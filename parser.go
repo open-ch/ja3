@@ -63,14 +63,13 @@ func (j *JA3) parseSegment(segment []byte) error {
 		return &ParseError{VersionErr, 1}
 	}
 
-	hs := segment[recordLayerHeaderLen:]
-
-	// Check if actual length of handshake matches (this is a great exclusion criterion for false positives,
-	// as these fields have to match the actual length of the rest of the segment)
+    // Check that the Handshake is as long as expected from the length field
 	segmentLen := uint16(segment[3])<<8 | uint16(segment[4])
-	if len(hs) != int(segmentLen) {
-		return &ParseError{LengthErr, 2}
-	}
+    if len(segment[recordLayerHeaderLen:]) < int(segmentLen) {
+        return &ParseError{LengthErr, 2}
+    }
+    // Keep the Handshake messege, ignore any additional following record types
+    hs := segment[recordLayerHeaderLen:recordLayerHeaderLen+int(segmentLen)]
 
 	err := j.parseHandshake(hs)
 
